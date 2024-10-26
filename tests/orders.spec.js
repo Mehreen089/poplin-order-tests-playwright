@@ -1,4 +1,4 @@
-const { test, chromium , expect} = require('@playwright/test');
+const { test, chromium} = require('@playwright/test');
 const LoginPage = require('../pages/loginPage');
 const HomePage = require('../pages/homePage');
 const DeliveryOptionsPage = require('../pages/deliveryOptionsPage');
@@ -46,7 +46,7 @@ test.beforeEach(async ({ page }) => {
   await homePage.verifyHomePage();
 });
 
-test('Successful Order Placement for New Order', async ({ page }) => {
+test('Successful Order Placement for New Order', async () => {
   let orderOldCount = await homePage.getOrdersCount();
   await homePage.createNewOrder();
   await profilePage.clickContinueBtn();
@@ -66,7 +66,7 @@ test('Successful Order Placement for New Order', async ({ page }) => {
   await homePage.verifyNewCard(orderOldCount);
 });
 
-test('Successful Order Placement for Repeat Last Order', async ({ page }) => {
+test('Successful Order Placement for Repeat Last Order', async () => {
   let orderOldCount = await homePage.getOrdersCount();
   await homePage.repeatLastOrder();
   await preferredProPage.clickContinueBtn();
@@ -74,4 +74,22 @@ test('Successful Order Placement for Repeat Last Order', async ({ page }) => {
   await reviewOrderPage.clickContinueBtn();
   await paymentsPage.addPaymentDetailsAndPlacePrder(orderDetails.cardNumber, orderDetails.cardExp, orderDetails.cardCVV);
   await homePage.verifyNewCard(orderOldCount);
+});
+
+test('Unsuccessful Order Placement for wrong card details', async () => {
+  await homePage.repeatLastOrder();
+  await preferredProPage.clickContinueBtn();
+  await reviewOrderPage.clickDismissPriceUpdate();
+  await reviewOrderPage.clickContinueBtn();
+  await paymentsPage.addPaymentDetailsAndPlacePrder('0000000000000000', orderDetails.cardExp, orderDetails.cardCVV);
+  await paymentsPage.verifyAlertMessage('Your card number is incorrect.');
+});
+
+test('Unsuccessful Order Placement for empty card details', async () => {
+  await homePage.repeatLastOrder();
+  await preferredProPage.clickContinueBtn();
+  await reviewOrderPage.clickDismissPriceUpdate();
+  await reviewOrderPage.clickContinueBtn();
+  await paymentsPage.clickPaybtn();
+  await paymentsPage.verifyAlertMessage('Your card number is incomplete.');
 });

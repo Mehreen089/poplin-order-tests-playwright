@@ -11,11 +11,14 @@ $ ./tree-md .
 
  * /playwright-project
    * /fixtures
-     * userLogin.json
+     * orderData.json
+     * userData.json
    * /tests
-     * orderPlacement.spec.js
+     * orders.spec.js
    * /pages
      * homePage.js  
+     * .
+     * .
    * playwright.config.js
    * package.json
 

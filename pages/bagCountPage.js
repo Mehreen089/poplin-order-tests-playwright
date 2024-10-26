@@ -1,4 +1,3 @@
-const { expect } = require('@playwright/test');
 const BasePage = require('./basePage');
 
 class BagCountPage extends BasePage{

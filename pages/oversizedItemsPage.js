@@ -1,4 +1,3 @@
-const { expect } = require('@playwright/test');
 const BasePage = require('./basePage');
 
 class OverSizedItemsPage extends BasePage{
@@ -23,13 +22,9 @@ class OverSizedItemsPage extends BasePage{
   }
 
   async checkAllDrawerCheckboxes() {
-    // await this.page.waitForTimeout(2000);
     await this.clickElement(this.drawerCheckBox1);
-   // await this.page.waitForTimeout(2000);
     await this.clickElement(this.drawerCheckBox2);
-   // await this.page.waitForTimeout(2000);
     await this.clickElement(this.drawerCheckBox3);
-   // await this.page.waitForTimeout(2000);
     await this.clickElement(this.drawerContinue);
   }
 }

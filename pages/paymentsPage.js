@@ -11,21 +11,25 @@ class PaymentsPage extends BasePage{
   }
 
   async addPaymentDetailsAndPlacePrder(cardNum, carExp, cardCVV) {
-    // await this.page.pause();
-    // await this.waitForElementVisible(this.cardNumber);
-    // await this.typeInElement(this.cardNumber, cardNum);
-    // await this.typeInElement(this.expiry, carExp);
-    // await this.typeInElement(this.cvv, cardCVV);
-    // await this.clickElement(this.payBtn);
-    //await this.page.waitForTimeout(15000);
     const frame = await this.page.frameLocator('iframe[title="Secure payment input frame"]');
-
-    // Perform actions inside the iframe
     await frame.locator( this.cardNumber).waitFor({ state: 'visible', timeout: 60000 });
     await frame.locator( this.cardNumber).fill(cardNum);
     await frame.locator(this.expiry ).fill(carExp);
     await frame.locator(this.cvv ).fill(cardCVV);
     await this.clickElement(this.payBtn);
+  }
+
+  async clickPaybtn() {
+    const frame = await this.page.frameLocator('iframe[title="Secure payment input frame"]');
+    await frame.locator( this.cardNumber).waitFor({ state: 'visible', timeout: 60000 });
+    await this.clickElement(this.payBtn);
+  }
+
+  async verifyAlertMessage(message){
+    this.page.on('dialog', async dialog => {
+      expect(dialog.message()).toBe(message);
+      await dialog.accept();
+    });
   }
 }
 
