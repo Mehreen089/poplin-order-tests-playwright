@@ -1,0 +1,10 @@
+{
+    "email": "andrew+ggg@poplin.co",
+    "password": "Password1!",
+    "payment": {
+        "cardNumber": "4111111111111111",
+        "expiryDate": "12/25",
+        "cvv": "123",
+        "amount": "50"
+      }
+}

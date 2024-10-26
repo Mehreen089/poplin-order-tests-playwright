@@ -1,0 +1,10 @@
+{
+    "deliveryOption": "Standard",
+    "bagSize": "regular",
+    "bagCount": "3",
+    "overSizedCount": "1",
+    "coverage": "basic",
+    "cardNumber": "4242424242424242",
+    "cardExp": "1126",
+    "cardCVV": "444"
+}
