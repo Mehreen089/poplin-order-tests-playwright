@@ -47,6 +47,7 @@ To run the tests, use the following command:
 ```bash
 yarn playwright test --ui
 ```
+you can see ScreenReordingOfTests as well to check execution
 
 This will execute all tests located in the /tests directory.
 
